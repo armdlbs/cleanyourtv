@@ -245,8 +245,8 @@
         <item>KEYCODE_F1:com.jio.media.jiotvplus</item>
         <item>KEYCODE_F8:in.startv.hotstar</item>
         <item>KEYCODE_F7:com.nuvio.tv</item>
-        <item>KEYCODE_F10:studio.scillarium.ottnavigator</item>
-        <item>KEYCODE_F11:io.gh.reisxd.tizentube.cobalt</item>
+        <item>KEYCODE_F9:studio.scillarium.ottnavigator</item>
+        <item>KEYCODE_F10:io.gh.reisxd.tizentube.cobalt</item>
     </string-array>
 
     <!-- Package of the stock launcher, for TVs whose firmware turns it back on after it was disabled. XGIMI's
