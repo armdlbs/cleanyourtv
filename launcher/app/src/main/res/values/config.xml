@@ -242,10 +242,10 @@
          where the firmware hands KEYCODE_GUIDE (172) to the stock launcher and no app ever receives it. Leave empty
          to omit. -->
     <string-array name="app_keys" translatable="false">
-        <item>KEYCODE_F14:in.startv.hotstar</item>
-        <item>KEYCODE_F15:com.nuvio.tv</item>
-        <item>KEYCODE_F16:studio.scillarium.ottnavigator</item>
-        <item>KEYCODE_F17:io.gh.reisxd.tizentube.cobalt</item>
+        <item>scan:458857:in.startv.hotstar</item>
+        <item>scan:458858:com.nuvio.tv</item>
+        <item>scan:458859:studio.scillarium.ottnavigator</item>
+        <item>scan:458860:io.gh.reisxd.tizentube.cobalt</item>
     </string-array>
 
     <!-- Package of the stock launcher, for TVs whose firmware turns it back on after it was disabled. XGIMI's
