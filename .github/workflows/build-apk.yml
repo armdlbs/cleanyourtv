@@ -17,24 +17,26 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Decode permanent signing keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.jks
+
       - name: Grant execute permission for gradlew
         run: chmod +x launcher/gradlew
 
-      - name: Build Debug and Release APKs
+      - name: Build APKs
         working-directory: launcher
         env:
           HOME_KEY_SERVICE: "1"
           INPUT_KEY_SERVICE: "1"
-        run: ./gradlew assembleDebug assembleRelease
+        run: ./gradlew assembleRelease
 
-      - name: Upload Debug APK (Supports run-as)
+      - name: Sign APK with permanent key
+        run: |
+          APKSIGNER=$(find $ANDROID_HOME/build-tools -name apksigner | sort -V | tail -n 1)
+          $APKSIGNER sign --ks release.jks --ks-key-alias mykey --ks-pass pass:android123 --key-pass pass:android123 --out app-release-signed.apk launcher/app/build/outputs/apk/release/*.apk
+
+      - name: Upload Permanently Signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: CleanYourTV-Debug-APK
-          path: launcher/app/build/outputs/apk/debug/*.apk
-
-      - name: Upload Release APK (Faster daily use)
-        uses: actions/upload-artifact@v4
-        with:
-          name: CleanYourTV-Release-APK
-          path: launcher/app/build/outputs/apk/release/*.apk
+          name: CleanYourTV-Signed-APK
+          path: app-release-signed.apk
