@@ -1,0 +1,21 @@
+name: Generate Signing Key
+on:
+  workflow_dispatch:
+jobs:
+  make-key:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Generate permanent keystore
+        run: keytool -genkey -v -keystore release.jks -keyalg RSA -keysize 2048 -validity 10000 -alias mykey -storepass android123 -keypass android123 -dname "CN=CleanYourTV, OU=TV, O=Home, L=City, S=State, C=IN"
+      - name: Convert to Base64 text
+        run: base64 -w 0 release.jks > key_base64.txt
+      - name: Upload Base64 Key
+        uses: actions/upload-artifact@v4
+        with:
+          name: My-Permanent-Key
+          path: key_base64.txt
